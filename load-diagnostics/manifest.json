@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "加载诊断（不恢复短信）",
+  "version": "0.1.0",
+  "description": "说明扩展为何没有界面。不发送网络请求，不修改请求头，不恢复短信。",
+  "permissions": ["activeTab"],
+  "host_permissions": [
+    "https://accounts.google.com/*",
+    "https://console.cloud.google.com/*"
+  ],
+  "action": {
+    "default_title": "加载诊断（不恢复短信）",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://accounts.google.com/*",
+        "https://console.cloud.google.com/*"
+      ],
+      "js": ["diagnose.js", "content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

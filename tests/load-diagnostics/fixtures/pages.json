@@ -1,0 +1,50 @@
+[
+  {
+    "name": "qrcode path keeps query and userinfo out of the text",
+    "url": "https://user:secret-password@accounts.google.com/v3/signin/challenge/iap/qrcode?TL=SHOULD_NOT_LEAK",
+    "code": "qrcode-panel",
+    "forbidden": ["secret-password", "SHOULD_NOT_LEAK", "TL="]
+  },
+  {
+    "name": "account challenge without qrcode suffix stays silent in the original",
+    "url": "https://accounts.google.com/v3/signin/challenge/iap?continue=https%3A%2F%2Faccounts.google.com%2FHiddenContinuation%2Fselection%3FTL%3DSECRETTOKEN",
+    "code": "accounts-panel-hidden",
+    "forbidden": ["SECRETTOKEN", "HiddenContinuation", "continue="]
+  },
+  {
+    "name": "uppercase qrcode suffix is not the original gate",
+    "url": "https://accounts.google.com/v3/signin/challenge/iap/QRCODE?TL=CASELEAK",
+    "code": "accounts-panel-hidden",
+    "forbidden": ["CASELEAK", "QRCODE"]
+  },
+  {
+    "name": "cloud console query is not rendered",
+    "url": "https://console.cloud.google.com/home/dashboard?project=SECRETPROJECT&token=TOKENVALUE",
+    "code": "cloud-console-panel",
+    "forbidden": ["SECRETPROJECT", "TOKENVALUE", "project="]
+  },
+  {
+    "name": "short link path token is not rendered",
+    "url": "https://g.co/verify/SUPERSECRETCODE?q=LINKLEAK",
+    "code": "short-link-no-script",
+    "forbidden": ["SUPERSECRETCODE", "LINKLEAK", "verify/"]
+  },
+  {
+    "name": "www short link host is outside the original content script",
+    "url": "https://www.g.co/verify/WWWSECRET",
+    "code": "outside-declared-host",
+    "forbidden": ["WWWSECRET", "www.g.co"]
+  },
+  {
+    "name": "http page is not injected even if the path matches",
+    "url": "http://accounts.google.com/v3/signin/challenge/iap/qrcode?TL=LEAKHTTP",
+    "code": "non-https",
+    "forbidden": ["LEAKHTTP", "qrcode"]
+  },
+  {
+    "name": "other google host has no panel",
+    "url": "https://mail.google.com/mail/u/0/#inbox",
+    "code": "outside-declared-host",
+    "forbidden": ["mail.google.com", "inbox"]
+  }
+]

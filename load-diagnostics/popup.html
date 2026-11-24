@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>加载诊断（不恢复短信）</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>加载诊断</h1>
+  <p class="banner">这不是短信修复版。它不恢复短信，不发送验证请求，也不修改浏览器标识。</p>
+  <ul>
+    <li><b>HID</b>：诊断脚本已运行，但原版不会显示面板。</li>
+    <li><b>UI</b>：原版会显示它自己的面板。本包没有替你完成验证。</li>
+    <li>没有角标：诊断脚本没有注入。</li>
+  </ul>
+  <pre id="out">正在读取当前页状态。</pre>
+  <script src="diagnose.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
